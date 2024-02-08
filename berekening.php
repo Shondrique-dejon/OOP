@@ -1,42 +1,44 @@
 <?php
-class berekening {
+class Berekening {
     private int $room;
     private float $length;
     private float $height;
-    private float $depth;
+    private float $width;
     private int $volume;
+    private float $pricePerCubicMeter;
 
-    public function __construct( $room, $width, $height, $length, $volume)
+    public function __construct($room, $width, $height, $length, $volume, $pricePerCubicMeter)
     {
         $this->room = $room;
         $this->length = $length;
         $this->height = $height;
-        $this->depth = $depth;
+        $this->width = $width;
         $this->volume = $volume;
+        $this->pricePerCubicMeter = $pricePerCubicMeter;
     }
 
-    public function setVolume($volume)
+    public function setVolume()
     {
-       $this->volume = $this->Length * $this->depth * $this->height  ;
+        $this->volume = $this->length * $this->width * $this->height;
     }
 
     public function getPrice()
     {
-       return "De prijs is:".$price;
+     
+        return "De prijs is: €" . ($this->volume * $this->pricePerCubicMeter);
     }
 
-    public function displayInfo(){
-        echo "Lengte:" . $this->length. "<br>";
-        echo "Prijs:" . $this->volume. "<br>";
-      
-        }
-
+    public function displayInfo()
+    {
+        echo "Lengte: " . $this->length . "m<br>";
+        echo "Breedte: " . $this->width . "m<br>";
+        echo "Hoogte: " . $this->height . "m<br>";
+        echo "Volume: " . $this->volume . " m³ <br>";
+    }
 }
-$kamer1 = new berekening(2, 4, 8, 12, 14 );
-$kamer2 = new berekening(2, 4, 8, 12, 14 );
-$kamer3 = new berekening(2, 4, 8, 12, 14);
 
-$kamer1->displayInfo();
-$kamer2->displayInfo();
-$kamer3->displayInfo();
+$berekening = new Berekening(1, 5.0, 3.0, 2.0, 0, 10);
+$berekening->setVolume();
+$berekening->displayInfo();
+echo $berekening->getPrice();
 ?>
